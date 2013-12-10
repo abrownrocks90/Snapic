@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace Snapic
 {
-    public partial class Welcome : PhoneApplicationPage
+    public partial class EditPicture : PhoneApplicationPage
     {
-        public Welcome()
+        public EditPicture()
         {
             InitializeComponent();
         }

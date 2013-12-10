@@ -8,20 +8,25 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Snapic.Resources;
+using System.Diagnostics; //For debugging purposes
+using Microsoft.Devices;
+using System.IO;
+using System.IO.IsolatedStorage;
+using Microsoft.Xna.Framework.Media;
 
 namespace Snapic
 {
     public partial class MainPage : PhoneApplicationPage
     {
 
-        bool loggedIn = false;
+        PhotoCamera cam;
+        MediaLibrary libeary = new MediaLibrary();
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            this.Loaded += new RoutedEventHandler(MainPage_Loaded); 
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -29,18 +34,43 @@ namespace Snapic
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing))
+                cam = new Microsoft.Devices.PhotoCamera(CameraType.FrontFacing);
+
+            else
+                cam = new Microsoft.Devices.PhotoCamera(CameraType.Primary);
+
+
+            cam.CaptureCompleted += new EventHandler<CameraOperationCompletedEventArgs>(cam_CaptureCompleted);
+
+            System.Diagnostics.Debug.WriteLine(cam.Resolution);
+            viewFinderBrush.SetSource(cam);
+
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            cam.Dispose();
+
+            cam.CaptureCompleted -= cam_CaptureCompleted;
+
+            base.OnNavigatedFrom(e);
+        }
+
+        void cam_CaptureCompleted(object sender, Microsoft.Devices.CameraOperationCompletedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CAPTURED IMAGE!");
+        }
+
+        private void Save_Click()
         {
 
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("Other.xaml", UriKind.Relative));
-            System.Diagnostics.Debug.WriteLine("Loaded");
-        }
-
-        // Sample code for building a localized ApplicationBar
+        //Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
         //    // Set the page's ApplicationBar to a new instance of ApplicationBar.

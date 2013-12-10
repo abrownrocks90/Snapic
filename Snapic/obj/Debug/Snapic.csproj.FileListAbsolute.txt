@@ -25,3 +25,4 @@ C:\Users\Austin\documents\visual studio 2012\Projects\Snapic\Snapic\obj\Debug\Sn
 C:\Users\Austin\documents\visual studio 2012\Projects\Snapic\Snapic\obj\Debug\Welcome.g.cs
 C:\Users\Austin\documents\visual studio 2012\Projects\Snapic\Snapic\Bin\Debug\RestSharp.WindowsPhone.dll
 C:\Users\Austin\documents\visual studio 2012\Projects\Snapic\Snapic\Bin\Debug\RestSharp.WindowsPhone.xml
+C:\Users\Austin\Documents\Visual Studio 2012\Projects\Snapic\Snapic\obj\Debug\EditPicture.g.cs

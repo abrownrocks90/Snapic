@@ -12,43 +12,23 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Canvas HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="480">
-            <Button x:Name="ShutterButton" Height="100" Width="100" Canvas.Left="182" Canvas.Top="658" HorizontalAlignment="Center">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="Black"/>
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+    <Canvas x:Name="viewFinderCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" Height="480.953" Width="796.981" RenderTransformOrigin="0.897,0.704" Margin="-345.624,100.235,0,0" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+        <Canvas.RenderTransform>
+            <CompositeTransform Rotation="270" TranslateX="-30.509" TranslateY="-354.524"/>
+        </Canvas.RenderTransform>
+        <Canvas.Background>
+            <VideoBrush x:Name="viewFinderBrush"/>
+        </Canvas.Background>
+    </Canvas>
 
-            <Button x:Name="SnapList" Height="75" Width="75" Canvas.Left="10" Canvas.Top="683">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="SeaGreen"/>
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            
-            <Button x:Name="Settings" Height="75" Width="75" Canvas.Left="395" Canvas.Top="683" Click="Settings_Click">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="Red"/>
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </Canvas>
-    </Grid>
+    <!--App Bar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.0">
+            <!--Save icon-->
+            <shell:ApplicationBarIconButton x:Name="save" IconUri="Images/save.png" Text="Save"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>
